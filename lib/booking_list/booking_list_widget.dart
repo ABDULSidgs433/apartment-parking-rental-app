@@ -9,7 +9,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class BookingListWidget extends StatefulWidget {
-  const BookingListWidget({Key key}) : super(key: key);
+  const BookingListWidget({Key? key}) : super(key: key);
 
   @override
   _BookingListWidgetState createState() => _BookingListWidgetState();
@@ -335,7 +335,7 @@ class _BookingListWidgetState extends State<BookingListWidget> {
                   );
                 }
                 List<ConfirmBookingRecord> listViewConfirmBookingRecordList =
-                    snapshot.data;
+                    snapshot.data!;
                 return ListView.builder(
                   padding: EdgeInsets.zero,
                   scrollDirection: Axis.vertical,
@@ -377,7 +377,7 @@ class _BookingListWidgetState extends State<BookingListWidget> {
                             image: DecorationImage(
                               fit: BoxFit.fitWidth,
                               image: Image.network(
-                                listViewConfirmBookingRecord.img,
+                                listViewConfirmBookingRecord.img!,
                               ).image,
                             ),
                             boxShadow: [
@@ -409,7 +409,7 @@ class _BookingListWidgetState extends State<BookingListWidget> {
                                       Expanded(
                                         child: Text(
                                           listViewConfirmBookingRecord
-                                              .vehicleType,
+                                              .vehicleType!,
                                           style: FlutterFlowTheme.of(context)
                                               .title1
                                               .override(
@@ -439,7 +439,7 @@ class _BookingListWidgetState extends State<BookingListWidget> {
                                           ),
                                           Text(
                                             listViewConfirmBookingRecord
-                                                .totalAmt
+                                                .totalAmt!
                                                 .toString(),
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyText1
@@ -464,7 +464,7 @@ class _BookingListWidgetState extends State<BookingListWidget> {
                                     children: [
                                       Text(
                                         listViewConfirmBookingRecord
-                                            .directionType,
+                                            .directionType!,
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText2
                                             .override(
@@ -488,7 +488,7 @@ class _BookingListWidgetState extends State<BookingListWidget> {
                                             ),
                                       ),
                                       Text(
-                                        listViewConfirmBookingRecord.floor
+                                        listViewConfirmBookingRecord.floor!
                                             .toString(),
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText2
@@ -571,7 +571,7 @@ class _BookingListWidgetState extends State<BookingListWidget> {
                                                     dateTimeFormat(
                                                         'MMMEd',
                                                         listViewConfirmBookingRecord
-                                                            .fromdate),
+                                                            .fromdate!),
                                                     style: FlutterFlowTheme.of(
                                                             context)
                                                         .bodyText1
@@ -606,7 +606,7 @@ class _BookingListWidgetState extends State<BookingListWidget> {
                                                   dateTimeFormat(
                                                       'yMMMd',
                                                       listViewConfirmBookingRecord
-                                                          .todate),
+                                                          .todate!),
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .bodyText1
@@ -641,7 +641,7 @@ class _BookingListWidgetState extends State<BookingListWidget> {
                                                                   2, 8, 0, 0),
                                                       child: Text(
                                                         listViewConfirmBookingRecord
-                                                            .daysCount
+                                                            .daysCount!
                                                             .toString(),
                                                         textAlign:
                                                             TextAlign.start,
@@ -700,7 +700,7 @@ class _BookingListWidgetState extends State<BookingListWidget> {
                                                         dateTimeFormat(
                                                             'jm',
                                                             listViewConfirmBookingRecord
-                                                                .regtime),
+                                                                .regtime!),
                                                         style: FlutterFlowTheme
                                                                 .of(context)
                                                             .title3
@@ -720,7 +720,7 @@ class _BookingListWidgetState extends State<BookingListWidget> {
                                                       dateTimeFormat(
                                                           'MMMMEEEEd',
                                                           listViewConfirmBookingRecord
-                                                              .regtime),
+                                                              .regtime!),
                                                       textAlign: TextAlign.end,
                                                       style:
                                                           FlutterFlowTheme.of(

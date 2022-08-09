@@ -10,14 +10,14 @@ import '../backend/backend.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../auth/auth_util.dart';
 
-String makeACall(String mobileNo) {
+String makeACall(String? mobileNo) {
   // Add your function code here!
   mobileNo = '8885786692';
 
   return "tel:$mobileNo";
 }
 
-String autoIncrementUid(String uid) {
+String autoIncrementUid(String? uid) {
   // Add your function code here!
   String _randomString = uid.toString() +
       math.Random().nextInt(9999).toString() +
@@ -26,16 +26,16 @@ String autoIncrementUid(String uid) {
   return _randomString;
 }
 
-int toIntConv(String floorCount) {
+int toIntConv(String? floorCount) {
   // Add your function code here!
-  int fcount = int.parse(floorCount);
+  int fcount = int.parse(floorCount!);
   return fcount;
 }
 
 double dateDiffCal(
-  DateTime fdate,
-  DateTime tdate,
-  double price,
+  DateTime? fdate,
+  DateTime? tdate,
+  double? price,
 ) {
   // date differnce between days
   DateTime cur = DateTime.now();
@@ -49,8 +49,8 @@ double dateDiffCal(
 }
 
 int daysDiff(
-  DateTime fromDate,
-  DateTime toDate,
+  DateTime? fromDate,
+  DateTime? toDate,
 ) {
   // Add your function code here!
   DateTime cur = DateTime.now();
@@ -64,20 +64,35 @@ int daysDiff(
 }
 
 String currentImg(
-  String stateImg,
-  String getImg,
+  String? stateImg,
+  String? getImg,
 ) {
   // Add your function code here!
   if (getImg != null && getImg != "") {
     return stateImg = getImg;
   }
-  return stateImg;
+  return stateImg!;
 }
 
-DateTime isDatePicked(DateTime pickedDate) {
+DateTime isDatePicked(DateTime? pickedDate) {
   // Add your function code here!
   if (pickedDate != null) {
     return pickedDate;
   }
   return DateTime.now();
+}
+
+bool hasImgFile(String? imgPath) {
+  // Add your function code here!
+  return imgPath != null && imgPath != "";
+}
+
+bool isMatchDates(
+  DateTime? fromdate,
+  DateTime? todate,
+  List<DocumentReference>? collection,
+) {
+  // Add your function code here!
+
+  return false;
 }

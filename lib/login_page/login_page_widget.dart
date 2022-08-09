@@ -10,16 +10,16 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LoginPageWidget extends StatefulWidget {
-  const LoginPageWidget({Key key}) : super(key: key);
+  const LoginPageWidget({Key? key}) : super(key: key);
 
   @override
   _LoginPageWidgetState createState() => _LoginPageWidgetState();
 }
 
 class _LoginPageWidgetState extends State<LoginPageWidget> {
-  TextEditingController userloginController;
-  TextEditingController userpasswordController;
-  bool userpasswordVisibility;
+  TextEditingController? userloginController;
+  TextEditingController? userpasswordController;
+  late bool userpasswordVisibility;
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -160,7 +160,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                           size: 30,
                                         ),
                                         suffixIcon:
-                                            userloginController.text.isNotEmpty
+                                            userloginController!.text.isNotEmpty
                                                 ? InkWell(
                                                     onTap: () => setState(
                                                       () => userloginController
@@ -323,14 +323,14 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                   child: FFButtonWidget(
                                     onPressed: () async {
                                       if (formKey.currentState == null ||
-                                          !formKey.currentState.validate()) {
+                                          !formKey.currentState!.validate()) {
                                         return;
                                       }
 
                                       final user = await signInWithEmail(
                                         context,
-                                        userloginController.text,
-                                        userpasswordController.text,
+                                        userloginController!.text,
+                                        userpasswordController!.text,
                                       );
                                       if (user == null) {
                                         return;

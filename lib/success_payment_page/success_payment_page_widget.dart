@@ -10,7 +10,7 @@ import 'package:lottie/lottie.dart';
 
 class SuccessPaymentPageWidget extends StatefulWidget {
   const SuccessPaymentPageWidget({
-    Key key,
+    Key? key,
     this.img,
     this.totalAmt,
     this.fromDate,
@@ -21,14 +21,14 @@ class SuccessPaymentPageWidget extends StatefulWidget {
     this.bookbyEmailid,
   }) : super(key: key);
 
-  final String img;
-  final double totalAmt;
-  final DateTime fromDate;
-  final DateTime toDate;
-  final String direction;
-  final int daysCount;
-  final int floor;
-  final String bookbyEmailid;
+  final String? img;
+  final double? totalAmt;
+  final DateTime? fromDate;
+  final DateTime? toDate;
+  final String? direction;
+  final int? daysCount;
+  final int? floor;
+  final String? bookbyEmailid;
 
   @override
   _SuccessPaymentPageWidgetState createState() =>
@@ -58,15 +58,13 @@ class _SuccessPaymentPageWidgetState extends State<SuccessPaymentPageWidget> {
           );
         }
         List<ConfirmBookingRecord> successPaymentPageConfirmBookingRecordList =
-            snapshot.data;
+            snapshot.data!;
         // Return an empty Container when the document does not exist.
-        if (snapshot.data.isEmpty) {
+        if (snapshot.data!.isEmpty) {
           return Container();
         }
         final successPaymentPageConfirmBookingRecord =
-            successPaymentPageConfirmBookingRecordList.isNotEmpty
-                ? successPaymentPageConfirmBookingRecordList.first
-                : null;
+            successPaymentPageConfirmBookingRecordList.first;
         return Scaffold(
           key: scaffoldKey,
           backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
@@ -225,7 +223,7 @@ class _SuccessPaymentPageWidgetState extends State<SuccessPaymentPageWidget> {
                               style: FlutterFlowTheme.of(context).bodyText2,
                             ),
                             Text(
-                              successPaymentPageConfirmBookingRecord.uid,
+                              successPaymentPageConfirmBookingRecord.uid!,
                               style: FlutterFlowTheme.of(context).bodyText1,
                             ),
                           ],
@@ -242,7 +240,7 @@ class _SuccessPaymentPageWidgetState extends State<SuccessPaymentPageWidget> {
                               style: FlutterFlowTheme.of(context).bodyText2,
                             ),
                             Text(
-                              successPaymentPageConfirmBookingRecord.utrNo,
+                              successPaymentPageConfirmBookingRecord.utrNo!,
                               style: FlutterFlowTheme.of(context).bodyText1,
                             ),
                           ],
@@ -367,7 +365,7 @@ class _SuccessPaymentPageWidgetState extends State<SuccessPaymentPageWidget> {
                         ),
                       ),
                       Text(
-                        widget.daysCount.toString(),
+                        widget.daysCount!.toString(),
                         style: FlutterFlowTheme.of(context).bodyText1.override(
                               fontFamily: 'Poppins',
                               fontSize: 35,
@@ -427,7 +425,7 @@ class _SuccessPaymentPageWidgetState extends State<SuccessPaymentPageWidget> {
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0, 0, 0, 4),
                                   child: Text(
-                                    widget.direction,
+                                    widget.direction!,
                                     style: FlutterFlowTheme.of(context)
                                         .subtitle2
                                         .override(
@@ -470,7 +468,7 @@ class _SuccessPaymentPageWidgetState extends State<SuccessPaymentPageWidget> {
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0, 0, 0, 4),
                                   child: Text(
-                                    widget.floor.toString(),
+                                    widget.floor!.toString(),
                                     style: FlutterFlowTheme.of(context)
                                         .subtitle2
                                         .override(

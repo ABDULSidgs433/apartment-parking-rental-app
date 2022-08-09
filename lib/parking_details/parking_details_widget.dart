@@ -15,7 +15,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 class ParkingDetailsWidget extends StatefulWidget {
   const ParkingDetailsWidget({
-    Key key,
+    Key? key,
     this.img,
     this.direction,
     this.weelertype,
@@ -28,16 +28,16 @@ class ParkingDetailsWidget extends StatefulWidget {
     this.uploadUid,
   }) : super(key: key);
 
-  final String img;
-  final String direction;
-  final String weelertype;
-  final String mobileno;
-  final double price;
-  final DateTime regtime;
-  final String regby;
-  final String whichfloor;
-  final String regbyEmail;
-  final String uploadUid;
+  final String? img;
+  final String? direction;
+  final String? weelertype;
+  final String? mobileno;
+  final double? price;
+  final DateTime? regtime;
+  final String? regby;
+  final String? whichfloor;
+  final String? regbyEmail;
+  final String? uploadUid;
 
   @override
   _ParkingDetailsWidgetState createState() => _ParkingDetailsWidgetState();
@@ -107,12 +107,12 @@ class _ParkingDetailsWidgetState extends State<ParkingDetailsWidget> {
                         borderRadius: BorderRadius.circular(4),
                       ),
                       child: Hero(
-                        tag: widget.img,
+                        tag: widget.img!,
                         transitionOnUserGestures: true,
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(4),
                           child: CachedNetworkImage(
-                            imageUrl: widget.img,
+                            imageUrl: widget.img!,
                             width: double.infinity,
                             height: MediaQuery.of(context).size.height * 0.425,
                             fit: BoxFit.cover,
@@ -163,7 +163,7 @@ class _ParkingDetailsWidgetState extends State<ParkingDetailsWidget> {
                                         ),
                                       ),
                                       Text(
-                                        widget.price.toString(),
+                                        widget.price!.toString(),
                                         style: FlutterFlowTheme.of(context)
                                             .subtitle1,
                                       ),
@@ -206,7 +206,7 @@ class _ParkingDetailsWidgetState extends State<ParkingDetailsWidget> {
                                         ),
                                       ),
                                       Text(
-                                        widget.direction,
+                                        widget.direction!,
                                         style: FlutterFlowTheme.of(context)
                                             .subtitle1,
                                       ),
@@ -244,7 +244,7 @@ class _ParkingDetailsWidgetState extends State<ParkingDetailsWidget> {
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
                                       Text(
-                                        widget.weelertype,
+                                        widget.weelertype!,
                                         style: FlutterFlowTheme.of(context)
                                             .subtitle1,
                                       ),
@@ -283,7 +283,7 @@ class _ParkingDetailsWidgetState extends State<ParkingDetailsWidget> {
                                         ),
                                       ),
                                       Text(
-                                        widget.whichfloor,
+                                        widget.whichfloor!,
                                         style: FlutterFlowTheme.of(context)
                                             .subtitle1,
                                       ),
@@ -321,7 +321,7 @@ class _ParkingDetailsWidgetState extends State<ParkingDetailsWidget> {
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
                                       Text(
-                                        widget.regby,
+                                        widget.regby!,
                                         style: FlutterFlowTheme.of(context)
                                             .subtitle1,
                                       ),
@@ -365,7 +365,7 @@ class _ParkingDetailsWidgetState extends State<ParkingDetailsWidget> {
                                           ),
                                         ),
                                         Text(
-                                          widget.mobileno,
+                                          widget.mobileno!,
                                           style: FlutterFlowTheme.of(context)
                                               .subtitle1,
                                         ),

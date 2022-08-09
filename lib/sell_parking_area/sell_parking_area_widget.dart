@@ -16,7 +16,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 class SellParkingAreaWidget extends StatefulWidget {
   const SellParkingAreaWidget({
-    Key key,
+    Key? key,
     this.img,
     this.price,
     this.floor,
@@ -24,11 +24,11 @@ class SellParkingAreaWidget extends StatefulWidget {
     this.direction,
   }) : super(key: key);
 
-  final String img;
-  final double price;
-  final int floor;
-  final String vehicleType;
-  final String direction;
+  final String? img;
+  final double? price;
+  final int? floor;
+  final String? vehicleType;
+  final String? direction;
 
   @override
   _SellParkingAreaWidgetState createState() => _SellParkingAreaWidgetState();
@@ -36,10 +36,10 @@ class SellParkingAreaWidget extends StatefulWidget {
 
 class _SellParkingAreaWidgetState extends State<SellParkingAreaWidget> {
   String uploadedFileUrl = '';
-  TextEditingController pricePerDayCtrlController;
-  TextEditingController foolrCountCtrlController;
-  String vehicleTypeDropValue;
-  String directionDropValue;
+  TextEditingController? pricePerDayCtrlController;
+  TextEditingController? foolrCountCtrlController;
+  String? vehicleTypeDropValue;
+  String? directionDropValue;
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -121,11 +121,11 @@ class _SellParkingAreaWidgetState extends State<SellParkingAreaWidget> {
                                           await uploadData(
                                               m.storagePath, m.bytes))))
                                   .where((u) => u != null)
+                                  .map((u) => u!)
                                   .toList();
                               ScaffoldMessenger.of(context)
                                   .hideCurrentSnackBar();
-                              if (downloadUrls != null &&
-                                  downloadUrls.length == selectedMedia.length) {
+                              if (downloadUrls.length == selectedMedia.length) {
                                 setState(
                                     () => uploadedFileUrl = downloadUrls.first);
                                 showUploadMessage(
@@ -244,7 +244,7 @@ class _SellParkingAreaWidgetState extends State<SellParkingAreaWidget> {
                                   FlutterFlowTheme.of(context).primaryBtnText,
                               contentPadding: EdgeInsetsDirectional.fromSTEB(
                                   10, 10, 10, 10),
-                              suffixIcon: pricePerDayCtrlController
+                              suffixIcon: pricePerDayCtrlController!
                                       .text.isNotEmpty
                                   ? InkWell(
                                       onTap: () => setState(
@@ -304,7 +304,7 @@ class _SellParkingAreaWidgetState extends State<SellParkingAreaWidget> {
                                   FlutterFlowTheme.of(context).primaryBtnText,
                               contentPadding: EdgeInsetsDirectional.fromSTEB(
                                   10, 10, 10, 10),
-                              suffixIcon: foolrCountCtrlController
+                              suffixIcon: foolrCountCtrlController!
                                       .text.isNotEmpty
                                   ? InkWell(
                                       onTap: () => setState(
@@ -376,7 +376,7 @@ class _SellParkingAreaWidgetState extends State<SellParkingAreaWidget> {
                           child: FFButtonWidget(
                             onPressed: () async {
                               if (formKey.currentState == null ||
-                                  !formKey.currentState.validate()) {
+                                  !formKey.currentState!.validate()) {
                                 return;
                               }
 
@@ -394,9 +394,9 @@ class _SellParkingAreaWidgetState extends State<SellParkingAreaWidget> {
                                   createUploadParkingRecordData(
                                 parkingImg: uploadedFileUrl,
                                 price: double.parse(
-                                    pricePerDayCtrlController.text),
+                                    pricePerDayCtrlController!.text),
                                 locationDirection: directionDropValue,
-                                floor: foolrCountCtrlController.text,
+                                floor: foolrCountCtrlController!.text,
                                 vehicleType: vehicleTypeDropValue,
                                 regbyEmailId: currentUserEmail,
                                 uid: functions.autoIncrementUid(

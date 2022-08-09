@@ -11,7 +11,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class UploadListWidget extends StatefulWidget {
-  const UploadListWidget({Key key}) : super(key: key);
+  const UploadListWidget({Key? key}) : super(key: key);
 
   @override
   _UploadListWidgetState createState() => _UploadListWidgetState();
@@ -83,7 +83,7 @@ class _UploadListWidgetState extends State<UploadListWidget> {
                         );
                       }
                       List<UploadParkingRecord> columnUploadParkingRecordList =
-                          snapshot.data;
+                          snapshot.data!;
                       return SingleChildScrollView(
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
@@ -143,7 +143,7 @@ class _UploadListWidgetState extends State<UploadListWidget> {
                                               ),
                                               child: Image.network(
                                                 columnUploadParkingRecord
-                                                    .parkingImg,
+                                                    .parkingImg!,
                                                 width: 100,
                                                 height: 100,
                                                 fit: BoxFit.cover,
@@ -164,7 +164,7 @@ class _UploadListWidgetState extends State<UploadListWidget> {
                                                 children: [
                                                   Text(
                                                     columnUploadParkingRecord
-                                                        .locationDirection,
+                                                        .locationDirection!,
                                                     style: FlutterFlowTheme.of(
                                                             context)
                                                         .bodyText1,
@@ -210,7 +210,7 @@ class _UploadListWidgetState extends State<UploadListWidget> {
                                                     ),
                                                     Text(
                                                       columnUploadParkingRecord
-                                                          .vehicleType,
+                                                          .vehicleType!,
                                                       textAlign:
                                                           TextAlign.start,
                                                       style:
@@ -236,7 +236,7 @@ class _UploadListWidgetState extends State<UploadListWidget> {
                                                 ),
                                                 Text(
                                                   columnUploadParkingRecord
-                                                      .price
+                                                      .price!
                                                       .toString(),
                                                   style: FlutterFlowTheme.of(
                                                           context)
@@ -269,7 +269,7 @@ class _UploadListWidgetState extends State<UploadListWidget> {
                                                     dateTimeFormat(
                                                         'yMMMd',
                                                         columnUploadParkingRecord
-                                                            .regtime),
+                                                            .regtime!),
                                                     style: FlutterFlowTheme.of(
                                                             context)
                                                         .bodyText2
@@ -283,7 +283,7 @@ class _UploadListWidgetState extends State<UploadListWidget> {
                                                   dateTimeFormat(
                                                       'jm',
                                                       columnUploadParkingRecord
-                                                          .regtime),
+                                                          .regtime!),
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .bodyText2

@@ -3,11 +3,11 @@ import 'package:rxdart/rxdart.dart';
 
 class ApartmentParkingRentalAppFirebaseUser {
   ApartmentParkingRentalAppFirebaseUser(this.user);
-  User user;
+  User? user;
   bool get loggedIn => user != null;
 }
 
-ApartmentParkingRentalAppFirebaseUser currentUser;
+ApartmentParkingRentalAppFirebaseUser? currentUser;
 bool get loggedIn => currentUser?.loggedIn ?? false;
 Stream<ApartmentParkingRentalAppFirebaseUser>
     apartmentParkingRentalAppFirebaseUserStream() => FirebaseAuth.instance

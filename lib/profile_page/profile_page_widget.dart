@@ -6,6 +6,7 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/upload_media.dart';
+import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_debounce/easy_debounce.dart';
@@ -14,7 +15,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ProfilePageWidget extends StatefulWidget {
-  const ProfilePageWidget({Key key}) : super(key: key);
+  const ProfilePageWidget({Key? key}) : super(key: key);
 
   @override
   _ProfilePageWidgetState createState() => _ProfilePageWidgetState();
@@ -22,8 +23,8 @@ class ProfilePageWidget extends StatefulWidget {
 
 class _ProfilePageWidgetState extends State<ProfilePageWidget> {
   String uploadedFileUrl = '';
-  TextEditingController displaynamectrlController;
-  TextEditingController mobilenoctrlController;
+  TextEditingController? displaynamectrlController;
+  TextEditingController? mobilenoctrlController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -47,14 +48,12 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
             ),
           );
         }
-        List<UsersRecord> profilePageUsersRecordList = snapshot.data;
+        List<UsersRecord> profilePageUsersRecordList = snapshot.data!;
         // Return an empty Container when the document does not exist.
-        if (snapshot.data.isEmpty) {
+        if (snapshot.data!.isEmpty) {
           return Container();
         }
-        final profilePageUsersRecord = profilePageUsersRecordList.isNotEmpty
-            ? profilePageUsersRecordList.first
-            : null;
+        final profilePageUsersRecord = profilePageUsersRecordList.first;
         return Scaffold(
           key: scaffoldKey,
           appBar: AppBar(
@@ -134,7 +133,8 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                     shape: BoxShape.circle,
                                   ),
                                   child: Image.network(
-                                    uploadedFileUrl,
+                                    functions.currentImg(uploadedFileUrl,
+                                        profilePageUsersRecord.photoUrl),
                                     fit: BoxFit.cover,
                                   ),
                                 ),
@@ -146,12 +146,12 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 16),
                         child: TextFormField(
-                          controller: mobilenoctrlController ??=
+                          controller: displaynamectrlController ??=
                               TextEditingController(
                             text: profilePageUsersRecord.displayName,
                           ),
                           onChanged: (_) => EasyDebounce.debounce(
-                            'mobilenoctrlController',
+                            'displaynamectrlController',
                             Duration(milliseconds: 2000),
                             () => setState(() {}),
                           ),
@@ -182,10 +182,11 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                             prefixIcon: Icon(
                               Icons.person_sharp,
                             ),
-                            suffixIcon: mobilenoctrlController.text.isNotEmpty
+                            suffixIcon: displaynamectrlController!
+                                    .text.isNotEmpty
                                 ? InkWell(
                                     onTap: () => setState(
-                                      () => mobilenoctrlController?.clear(),
+                                      () => displaynamectrlController?.clear(),
                                     ),
                                     child: Icon(
                                       Icons.clear,
@@ -202,12 +203,12 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 16),
                         child: TextFormField(
-                          controller: displaynamectrlController ??=
+                          controller: mobilenoctrlController ??=
                               TextEditingController(
                             text: profilePageUsersRecord.phoneNumber,
                           ),
                           onChanged: (_) => EasyDebounce.debounce(
-                            'displaynamectrlController',
+                            'mobilenoctrlController',
                             Duration(milliseconds: 2000),
                             () => setState(() {}),
                           ),
@@ -239,11 +240,10 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                             prefixIcon: Icon(
                               Icons.phone_android_rounded,
                             ),
-                            suffixIcon: displaynamectrlController
-                                    .text.isNotEmpty
+                            suffixIcon: mobilenoctrlController!.text.isNotEmpty
                                 ? InkWell(
                                     onTap: () => setState(
-                                      () => displaynamectrlController?.clear(),
+                                      () => mobilenoctrlController?.clear(),
                                     ),
                                     child: Icon(
                                       Icons.clear,
@@ -267,9 +267,24 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                 displayName:
                                     displaynamectrlController?.text ?? '',
                                 phoneNumber: mobilenoctrlController?.text ?? '',
+                                photoUrl: uploadedFileUrl,
                               );
                               await profilePageUsersRecord.reference
                                   .update(usersUpdateData);
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    'Edit  Profile Detials Updated Success ',
+                                    style: TextStyle(
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                    ),
+                                  ),
+                                  duration: Duration(milliseconds: 2000),
+                                  backgroundColor: Color(0x00000000),
+                                ),
+                              );
+                              Navigator.pop(context);
                             },
                             text: 'Update Profile',
                             options: FFButtonOptions(
@@ -318,10 +333,10 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                 selectedMedia.map((m) async =>
                                     await uploadData(m.storagePath, m.bytes))))
                             .where((u) => u != null)
+                            .map((u) => u!)
                             .toList();
                         ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                        if (downloadUrls != null &&
-                            downloadUrls.length == selectedMedia.length) {
+                        if (downloadUrls.length == selectedMedia.length) {
                           setState(() => uploadedFileUrl = downloadUrls.first);
                           showUploadMessage(
                             context,

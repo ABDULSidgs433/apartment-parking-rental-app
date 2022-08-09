@@ -8,14 +8,14 @@ import 'package:lottie/lottie.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class IntroScreenWidget extends StatefulWidget {
-  const IntroScreenWidget({Key key}) : super(key: key);
+  const IntroScreenWidget({Key? key}) : super(key: key);
 
   @override
   _IntroScreenWidgetState createState() => _IntroScreenWidgetState();
 }
 
 class _IntroScreenWidgetState extends State<IntroScreenWidget> {
-  PageController pageViewController;
+  PageController? pageViewController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -166,7 +166,7 @@ class _IntroScreenWidgetState extends State<IntroScreenWidget> {
                             count: 3,
                             axisDirection: Axis.horizontal,
                             onDotClicked: (i) {
-                              pageViewController.animateToPage(
+                              pageViewController!.animateToPage(
                                 i,
                                 duration: Duration(milliseconds: 500),
                                 curve: Curves.ease,
@@ -250,7 +250,7 @@ class _IntroScreenWidgetState extends State<IntroScreenWidget> {
                             } else {
                               setState(() => FFAppState().pageViewCount =
                                   FFAppState().pageViewCount + 1);
-                              await pageViewController.nextPage(
+                              await pageViewController?.nextPage(
                                 duration: Duration(milliseconds: 300),
                                 curve: Curves.ease,
                               );

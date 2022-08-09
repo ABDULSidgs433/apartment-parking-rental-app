@@ -17,11 +17,11 @@ class FFAppState {
     _autoUid = prefs.getInt('ff_autoUid') ?? _autoUid;
   }
 
-  SharedPreferences prefs;
+  late SharedPreferences prefs;
 
   int pageViewCount = 0;
 
-  String uploadImg;
+  String uploadImg = '';
 
   int _autoUid = 0;
   int get autoUid => _autoUid;
@@ -32,14 +32,14 @@ class FFAppState {
 
   String takeVehicleType = '2 weeler';
 
-  DateTime fromD;
+  DateTime? fromD;
 
-  DateTime toD;
+  DateTime? toD;
 
   String captchaVal = '';
 }
 
-LatLng _latLngFromString(String val) {
+LatLng? _latLngFromString(String? val) {
   if (val == null) {
     return null;
   }

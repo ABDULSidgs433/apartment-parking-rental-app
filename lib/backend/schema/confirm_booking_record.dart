@@ -11,56 +11,42 @@ abstract class ConfirmBookingRecord
   static Serializer<ConfirmBookingRecord> get serializer =>
       _$confirmBookingRecordSerializer;
 
-  @nullable
-  String get bookby;
+  String? get bookby;
 
-  @nullable
   @BuiltValueField(wireName: 'booked_email_id')
-  String get bookedEmailId;
+  String? get bookedEmailId;
 
-  @nullable
-  String get img;
+  String? get img;
 
-  @nullable
-  double get price;
+  double? get price;
 
-  @nullable
   @BuiltValueField(wireName: 'total_amt')
-  double get totalAmt;
+  double? get totalAmt;
 
-  @nullable
   @BuiltValueField(wireName: 'direction_type')
-  String get directionType;
+  String? get directionType;
 
-  @nullable
   @BuiltValueField(wireName: 'days_count')
-  int get daysCount;
+  int? get daysCount;
 
-  @nullable
-  int get floor;
+  int? get floor;
 
-  @nullable
-  DateTime get fromdate;
+  DateTime? get fromdate;
 
-  @nullable
-  DateTime get todate;
+  DateTime? get todate;
 
-  @nullable
   @BuiltValueField(wireName: 'utr_no')
-  String get utrNo;
+  String? get utrNo;
 
-  @nullable
-  String get vehicleType;
+  String? get vehicleType;
 
-  @nullable
-  DateTime get regtime;
+  DateTime? get regtime;
 
-  @nullable
-  String get uid;
+  String? get uid;
 
-  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
-  DocumentReference get reference;
+  DocumentReference? get ffRef;
+  DocumentReference get reference => ffRef!;
 
   static void _initializeBuilder(ConfirmBookingRecordBuilder builder) => builder
     ..bookby = ''
@@ -80,11 +66,11 @@ abstract class ConfirmBookingRecord
 
   static Stream<ConfirmBookingRecord> getDocument(DocumentReference ref) => ref
       .snapshots()
-      .map((s) => serializers.deserializeWith(serializer, serializedData(s)));
+      .map((s) => serializers.deserializeWith(serializer, serializedData(s))!);
 
   static Future<ConfirmBookingRecord> getDocumentOnce(DocumentReference ref) =>
       ref.get().then(
-          (s) => serializers.deserializeWith(serializer, serializedData(s)));
+          (s) => serializers.deserializeWith(serializer, serializedData(s))!);
 
   ConfirmBookingRecord._();
   factory ConfirmBookingRecord(
@@ -94,39 +80,45 @@ abstract class ConfirmBookingRecord
   static ConfirmBookingRecord getDocumentFromData(
           Map<String, dynamic> data, DocumentReference reference) =>
       serializers.deserializeWith(serializer,
-          {...mapFromFirestore(data), kDocumentReferenceField: reference});
+          {...mapFromFirestore(data), kDocumentReferenceField: reference})!;
 }
 
 Map<String, dynamic> createConfirmBookingRecordData({
-  String bookby,
-  String bookedEmailId,
-  String img,
-  double price,
-  double totalAmt,
-  String directionType,
-  int daysCount,
-  int floor,
-  DateTime fromdate,
-  DateTime todate,
-  String utrNo,
-  String vehicleType,
-  DateTime regtime,
-  String uid,
-}) =>
-    serializers.toFirestore(
-        ConfirmBookingRecord.serializer,
-        ConfirmBookingRecord((c) => c
-          ..bookby = bookby
-          ..bookedEmailId = bookedEmailId
-          ..img = img
-          ..price = price
-          ..totalAmt = totalAmt
-          ..directionType = directionType
-          ..daysCount = daysCount
-          ..floor = floor
-          ..fromdate = fromdate
-          ..todate = todate
-          ..utrNo = utrNo
-          ..vehicleType = vehicleType
-          ..regtime = regtime
-          ..uid = uid));
+  String? bookby,
+  String? bookedEmailId,
+  String? img,
+  double? price,
+  double? totalAmt,
+  String? directionType,
+  int? daysCount,
+  int? floor,
+  DateTime? fromdate,
+  DateTime? todate,
+  String? utrNo,
+  String? vehicleType,
+  DateTime? regtime,
+  String? uid,
+}) {
+  final firestoreData = serializers.toFirestore(
+    ConfirmBookingRecord.serializer,
+    ConfirmBookingRecord(
+      (c) => c
+        ..bookby = bookby
+        ..bookedEmailId = bookedEmailId
+        ..img = img
+        ..price = price
+        ..totalAmt = totalAmt
+        ..directionType = directionType
+        ..daysCount = daysCount
+        ..floor = floor
+        ..fromdate = fromdate
+        ..todate = todate
+        ..utrNo = utrNo
+        ..vehicleType = vehicleType
+        ..regtime = regtime
+        ..uid = uid,
+    ),
+  );
+
+  return firestoreData;
+}

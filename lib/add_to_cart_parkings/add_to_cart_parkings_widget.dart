@@ -11,7 +11,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 class AddToCartParkingsWidget extends StatefulWidget {
   const AddToCartParkingsWidget({
-    Key key,
+    Key? key,
     this.direction,
     this.floor,
     this.price,
@@ -20,12 +20,12 @@ class AddToCartParkingsWidget extends StatefulWidget {
     this.vehicleType,
   }) : super(key: key);
 
-  final String direction;
-  final int floor;
-  final double price;
-  final String img;
-  final String uid;
-  final String vehicleType;
+  final String? direction;
+  final int? floor;
+  final double? price;
+  final String? img;
+  final String? uid;
+  final String? vehicleType;
 
   @override
   _AddToCartParkingsWidgetState createState() =>
@@ -56,7 +56,7 @@ class _AddToCartParkingsWidgetState extends State<AddToCartParkingsWidget> {
           );
         }
         List<AddtocartRecord> addToCartParkingsAddtocartRecordList =
-            snapshot.data;
+            snapshot.data!;
         return Scaffold(
           key: scaffoldKey,
           appBar: AppBar(
@@ -155,7 +155,7 @@ class _AddToCartParkingsWidgetState extends State<AddToCartParkingsWidget> {
                                               ),
                                             ),
                                             child: Image.network(
-                                              addToCartParkingListItem.img,
+                                              addToCartParkingListItem.img!,
                                               width: 100,
                                               height: 100,
                                               fit: BoxFit.cover,
@@ -176,7 +176,7 @@ class _AddToCartParkingsWidgetState extends State<AddToCartParkingsWidget> {
                                               children: [
                                                 Text(
                                                   addToCartParkingListItem
-                                                      .directiontype,
+                                                      .directiontype!,
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .bodyText1,
@@ -221,7 +221,7 @@ class _AddToCartParkingsWidgetState extends State<AddToCartParkingsWidget> {
                                                   ),
                                                   Text(
                                                     addToCartParkingListItem
-                                                        .vehicleType,
+                                                        .vehicleType!,
                                                     textAlign: TextAlign.start,
                                                     style: FlutterFlowTheme.of(
                                                             context)
@@ -244,7 +244,7 @@ class _AddToCartParkingsWidgetState extends State<AddToCartParkingsWidget> {
                                                 ),
                                               ),
                                               Text(
-                                                addToCartParkingListItem.price
+                                                addToCartParkingListItem.price!
                                                     .toString(),
                                                 style:
                                                     FlutterFlowTheme.of(context)

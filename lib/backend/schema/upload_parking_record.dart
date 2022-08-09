@@ -11,43 +11,33 @@ abstract class UploadParkingRecord
   static Serializer<UploadParkingRecord> get serializer =>
       _$uploadParkingRecordSerializer;
 
-  @nullable
   @BuiltValueField(wireName: 'parking_img')
-  String get parkingImg;
+  String? get parkingImg;
 
-  @nullable
-  double get price;
+  double? get price;
 
-  @nullable
   @BuiltValueField(wireName: 'location_direction')
-  String get locationDirection;
+  String? get locationDirection;
 
-  @nullable
-  String get floor;
+  String? get floor;
 
-  @nullable
   @BuiltValueField(wireName: 'vehicle_type')
-  String get vehicleType;
+  String? get vehicleType;
 
-  @nullable
-  String get uid;
+  String? get uid;
 
-  @nullable
-  DateTime get regtime;
+  DateTime? get regtime;
 
-  @nullable
   @BuiltValueField(wireName: 'regby_email_id')
-  String get regbyEmailId;
+  String? get regbyEmailId;
 
-  @nullable
-  String get regby;
+  String? get regby;
 
-  @nullable
-  String get regbymobile;
+  String? get regbymobile;
 
-  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
-  DocumentReference get reference;
+  DocumentReference? get ffRef;
+  DocumentReference get reference => ffRef!;
 
   static void _initializeBuilder(UploadParkingRecordBuilder builder) => builder
     ..parkingImg = ''
@@ -65,11 +55,11 @@ abstract class UploadParkingRecord
 
   static Stream<UploadParkingRecord> getDocument(DocumentReference ref) => ref
       .snapshots()
-      .map((s) => serializers.deserializeWith(serializer, serializedData(s)));
+      .map((s) => serializers.deserializeWith(serializer, serializedData(s))!);
 
   static Future<UploadParkingRecord> getDocumentOnce(DocumentReference ref) =>
       ref.get().then(
-          (s) => serializers.deserializeWith(serializer, serializedData(s)));
+          (s) => serializers.deserializeWith(serializer, serializedData(s))!);
 
   UploadParkingRecord._();
   factory UploadParkingRecord(
@@ -79,31 +69,37 @@ abstract class UploadParkingRecord
   static UploadParkingRecord getDocumentFromData(
           Map<String, dynamic> data, DocumentReference reference) =>
       serializers.deserializeWith(serializer,
-          {...mapFromFirestore(data), kDocumentReferenceField: reference});
+          {...mapFromFirestore(data), kDocumentReferenceField: reference})!;
 }
 
 Map<String, dynamic> createUploadParkingRecordData({
-  String parkingImg,
-  double price,
-  String locationDirection,
-  String floor,
-  String vehicleType,
-  String uid,
-  DateTime regtime,
-  String regbyEmailId,
-  String regby,
-  String regbymobile,
-}) =>
-    serializers.toFirestore(
-        UploadParkingRecord.serializer,
-        UploadParkingRecord((u) => u
-          ..parkingImg = parkingImg
-          ..price = price
-          ..locationDirection = locationDirection
-          ..floor = floor
-          ..vehicleType = vehicleType
-          ..uid = uid
-          ..regtime = regtime
-          ..regbyEmailId = regbyEmailId
-          ..regby = regby
-          ..regbymobile = regbymobile));
+  String? parkingImg,
+  double? price,
+  String? locationDirection,
+  String? floor,
+  String? vehicleType,
+  String? uid,
+  DateTime? regtime,
+  String? regbyEmailId,
+  String? regby,
+  String? regbymobile,
+}) {
+  final firestoreData = serializers.toFirestore(
+    UploadParkingRecord.serializer,
+    UploadParkingRecord(
+      (u) => u
+        ..parkingImg = parkingImg
+        ..price = price
+        ..locationDirection = locationDirection
+        ..floor = floor
+        ..vehicleType = vehicleType
+        ..uid = uid
+        ..regtime = regtime
+        ..regbyEmailId = regbyEmailId
+        ..regby = regby
+        ..regbymobile = regbymobile,
+    ),
+  );
+
+  return firestoreData;
+}

@@ -7,16 +7,18 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../parking_details/parking_details_widget.dart';
+import '../profile_page/profile_page_widget.dart';
 import '../sell_parking_area/sell_parking_area_widget.dart';
 import '../splash_screen/splash_screen_widget.dart';
 import '../upload_list/upload_list_widget.dart';
+import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HomePageWidget extends StatefulWidget {
-  const HomePageWidget({Key key}) : super(key: key);
+  const HomePageWidget({Key? key}) : super(key: key);
 
   @override
   _HomePageWidgetState createState() => _HomePageWidgetState();
@@ -45,7 +47,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
             ),
           );
         }
-        List<UsersRecord> homePageUsersRecordList = snapshot.data;
+        List<UsersRecord> homePageUsersRecordList = snapshot.data!;
         return Scaffold(
           key: scaffoldKey,
           backgroundColor: FlutterFlowTheme.of(context).lineColor,
@@ -60,42 +62,70 @@ class _HomePageWidgetState extends State<HomePageWidget> {
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  Container(
-                    width: double.infinity,
-                    height: MediaQuery.of(context).size.height * 0.255,
-                    decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).darkColor,
-                    ),
-                    child: Align(
-                      alignment: AlignmentDirectional(0.65, 0),
-                      child: Stack(
-                        children: [
-                          Align(
-                            alignment: AlignmentDirectional(0, 0),
-                            child: Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(0, 15, 0, 0),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Container(
-                                    width: 120,
-                                    height: 120,
-                                    clipBehavior: Clip.antiAlias,
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
+                  InkWell(
+                    onTap: () async {
+                      await Navigator.push(
+                        context,
+                        PageTransition(
+                          type: PageTransitionType.rightToLeft,
+                          duration: Duration(milliseconds: 600),
+                          reverseDuration: Duration(milliseconds: 600),
+                          child: ProfilePageWidget(),
+                        ),
+                      );
+                    },
+                    child: Container(
+                      width: double.infinity,
+                      height: MediaQuery.of(context).size.height * 0.255,
+                      decoration: BoxDecoration(
+                        color: FlutterFlowTheme.of(context).darkColor,
+                      ),
+                      child: Align(
+                        alignment: AlignmentDirectional(0.65, 0),
+                        child: Stack(
+                          children: [
+                            Align(
+                              alignment: AlignmentDirectional(0, 0),
+                              child: Padding(
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(0, 15, 0, 0),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    AuthUserStreamWidget(
+                                      child: Container(
+                                        width: 120,
+                                        height: 120,
+                                        clipBehavior: Clip.antiAlias,
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                        ),
+                                        child: Image.network(
+                                          currentUserPhoto,
+                                        ),
+                                      ),
                                     ),
-                                    child: Image.network(
-                                      'https://picsum.photos/seed/950/600',
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0, 8, 0, 5),
+                                      child: AuthUserStreamWidget(
+                                        child: Text(
+                                          currentUserDisplayName,
+                                          textAlign: TextAlign.center,
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyText1
+                                              .override(
+                                                fontFamily: 'Poppins',
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryBtnText,
+                                              ),
+                                        ),
+                                      ),
                                     ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 8, 0, 5),
-                                    child: AuthUserStreamWidget(
+                                    AuthUserStreamWidget(
                                       child: Text(
-                                        currentUserDisplayName,
-                                        textAlign: TextAlign.center,
+                                        currentPhoneNumber,
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText1
                                             .override(
@@ -106,32 +136,20 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                             ),
                                       ),
                                     ),
-                                  ),
-                                  AuthUserStreamWidget(
-                                    child: Text(
-                                      currentPhoneNumber,
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyText1
-                                          .override(
-                                            fontFamily: 'Poppins',
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryBtnText,
-                                          ),
-                                    ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
-                          Align(
-                            alignment: AlignmentDirectional(0.35, 0.1),
-                            child: FaIcon(
-                              FontAwesomeIcons.edit,
-                              color: Color(0xFFF2F4F6),
-                              size: 28,
+                            Align(
+                              alignment: AlignmentDirectional(0.35, 0.1),
+                              child: FaIcon(
+                                FontAwesomeIcons.edit,
+                                color: Color(0xFFF2F4F6),
+                                size: 28,
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -404,20 +422,55 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 0, 12.5, 0),
-                                    child: Container(
-                                      width: 60,
-                                      height: 60,
-                                      clipBehavior: Clip.antiAlias,
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                      ),
-                                      child: Image.network(
-                                        'https://picsum.photos/seed/95/600',
-                                      ),
-                                    ),
+                                  Stack(
+                                    children: [
+                                      if (functions
+                                          .hasImgFile(currentUserPhoto))
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0, 0, 12.5, 0),
+                                          child: AuthUserStreamWidget(
+                                            child: Container(
+                                              width: 60,
+                                              height: 60,
+                                              clipBehavior: Clip.antiAlias,
+                                              decoration: BoxDecoration(
+                                                shape: BoxShape.circle,
+                                              ),
+                                              child: Image.network(
+                                                currentUserPhoto,
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      if (!functions
+                                          .hasImgFile(currentUserPhoto))
+                                        AuthUserStreamWidget(
+                                          child: Container(
+                                            width: 60,
+                                            height: 60,
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .grayIcon,
+                                              shape: BoxShape.circle,
+                                            ),
+                                            child: Align(
+                                              alignment:
+                                                  AlignmentDirectional(0, 0),
+                                              child: FaIcon(
+                                                FontAwesomeIcons.userAlt,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .lineColor,
+                                                size: 35,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                    ],
                                   ),
                                   Expanded(
                                     child: Column(
@@ -504,7 +557,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                           size: 30,
                                         ),
                                         onPressed: () async {
-                                          scaffoldKey.currentState
+                                          scaffoldKey.currentState!
                                               .openEndDrawer();
                                         },
                                       ),
@@ -880,7 +933,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                             );
                           }
                           List<UploadParkingRecord>
-                              columnUploadParkingRecordList = snapshot.data;
+                              columnUploadParkingRecordList = snapshot.data!;
                           return SingleChildScrollView(
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
@@ -976,7 +1029,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                     ),
                                                     child: Image.network(
                                                       columnUploadParkingRecord
-                                                          .parkingImg,
+                                                          .parkingImg!,
                                                       width: 100,
                                                       height: 100,
                                                       fit: BoxFit.cover,
@@ -1004,7 +1057,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                       0, 4, 0),
                                                           child: Text(
                                                             columnUploadParkingRecord
-                                                                .locationDirection,
+                                                                .locationDirection!,
                                                             style: FlutterFlowTheme
                                                                     .of(context)
                                                                 .bodyText1,
@@ -1061,7 +1114,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                           ),
                                                           Text(
                                                             columnUploadParkingRecord
-                                                                .vehicleType,
+                                                                .vehicleType!,
                                                             textAlign:
                                                                 TextAlign.start,
                                                             style: FlutterFlowTheme
@@ -1090,7 +1143,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                       ),
                                                       Text(
                                                         columnUploadParkingRecord
-                                                            .price
+                                                            .price!
                                                             .toString(),
                                                         style:
                                                             FlutterFlowTheme.of(
@@ -1128,7 +1181,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                     0, 0, 4, 0),
                                                         child: Text(
                                                           columnUploadParkingRecord
-                                                              .floor,
+                                                              .floor!,
                                                           style: FlutterFlowTheme
                                                                   .of(context)
                                                               .bodyText1,
@@ -1164,7 +1217,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                   dateTimeFormat(
                                                       'd/M/y',
                                                       columnUploadParkingRecord
-                                                          .regtime),
+                                                          .regtime!),
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .bodyText2
@@ -1181,7 +1234,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                   dateTimeFormat(
                                                       'jm',
                                                       columnUploadParkingRecord
-                                                          .regtime),
+                                                          .regtime!),
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .bodyText2

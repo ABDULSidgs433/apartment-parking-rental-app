@@ -11,7 +11,7 @@ import 'dart:math';
 
 class VerifyCapcha extends StatefulWidget {
   VerifyCapcha({
-    Key key,
+    Key? key,
     this.width,
     this.height,
     this.titlename,
@@ -20,12 +20,12 @@ class VerifyCapcha extends StatefulWidget {
     this.captchaCtrl,
   }) : super(key: key);
 
-  final double width;
-  final double height;
-  final String titlename;
-  final String msg;
+  final double? width;
+  final double? height;
+  final String? titlename;
+  final String? msg;
   final confirm;
-  String captchaCtrl;
+  String? captchaCtrl;
 
   @override
   _VerifyCapchaState createState() => _VerifyCapchaState();

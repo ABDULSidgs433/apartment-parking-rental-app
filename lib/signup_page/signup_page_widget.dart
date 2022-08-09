@@ -10,20 +10,20 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SignupPageWidget extends StatefulWidget {
-  const SignupPageWidget({Key key}) : super(key: key);
+  const SignupPageWidget({Key? key}) : super(key: key);
 
   @override
   _SignupPageWidgetState createState() => _SignupPageWidgetState();
 }
 
 class _SignupPageWidgetState extends State<SignupPageWidget> {
-  TextEditingController confirmpasswordCtrlController;
-  bool confirmpasswordCtrlVisibility;
-  TextEditingController createpasswordCtrlController;
-  bool createpasswordCtrlVisibility;
-  TextEditingController usercontactCtrlController;
-  TextEditingController usernameCtrlController;
-  TextEditingController useremailCtrlController;
+  TextEditingController? confirmpasswordCtrlController;
+  late bool confirmpasswordCtrlVisibility;
+  TextEditingController? createpasswordCtrlController;
+  late bool createpasswordCtrlVisibility;
+  TextEditingController? usercontactCtrlController;
+  TextEditingController? usernameCtrlController;
+  TextEditingController? useremailCtrlController;
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -177,7 +177,7 @@ class _SignupPageWidgetState extends State<SignupPageWidget> {
                                                 .primaryColor,
                                             size: 30,
                                           ),
-                                          suffixIcon: usernameCtrlController
+                                          suffixIcon: usernameCtrlController!
                                                   .text.isNotEmpty
                                               ? InkWell(
                                                   onTap: () => setState(
@@ -286,7 +286,7 @@ class _SignupPageWidgetState extends State<SignupPageWidget> {
                                               size: 30,
                                             ),
                                             suffixIcon:
-                                                usercontactCtrlController
+                                                usercontactCtrlController!
                                                         .text.isNotEmpty
                                                     ? InkWell(
                                                         onTap: () => setState(
@@ -397,7 +397,7 @@ class _SignupPageWidgetState extends State<SignupPageWidget> {
                                                       .primaryColor,
                                               size: 30,
                                             ),
-                                            suffixIcon: useremailCtrlController
+                                            suffixIcon: useremailCtrlController!
                                                     .text.isNotEmpty
                                                 ? InkWell(
                                                     onTap: () => setState(
@@ -649,7 +649,7 @@ class _SignupPageWidgetState extends State<SignupPageWidget> {
                                     child: FFButtonWidget(
                                       onPressed: () async {
                                         if (formKey.currentState == null ||
-                                            !formKey.currentState.validate()) {
+                                            !formKey.currentState!.validate()) {
                                           return;
                                         }
 
@@ -671,8 +671,8 @@ class _SignupPageWidgetState extends State<SignupPageWidget> {
                                         final user =
                                             await createAccountWithEmail(
                                           context,
-                                          useremailCtrlController.text,
-                                          createpasswordCtrlController.text,
+                                          useremailCtrlController!.text,
+                                          createpasswordCtrlController!.text,
                                         );
                                         if (user == null) {
                                           return;
@@ -680,11 +680,13 @@ class _SignupPageWidgetState extends State<SignupPageWidget> {
 
                                         final usersCreateData =
                                             createUsersRecordData(
-                                          email: useremailCtrlController.text,
+                                          email: useremailCtrlController!.text,
                                           displayName:
-                                              usernameCtrlController.text,
+                                              usernameCtrlController!.text,
                                           phoneNumber:
-                                              usercontactCtrlController.text,
+                                              usercontactCtrlController!.text,
+                                          createdTime: getCurrentTimestamp,
+                                          photoUrl: '',
                                         );
                                         await UsersRecord.collection
                                             .doc(user.uid)

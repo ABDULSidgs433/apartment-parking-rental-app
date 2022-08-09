@@ -9,6 +9,7 @@ part of 'serializers.dart';
 Serializers _$serializers = (new Serializers().toBuilder()
       ..add(AddtocartRecord.serializer)
       ..add(ConfirmBookingRecord.serializer)
+      ..add(NotificationsRecord.serializer)
       ..add(UploadParkingRecord.serializer)
       ..add(UsersRecord.serializer))
     .build();

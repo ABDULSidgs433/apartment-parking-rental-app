@@ -6,7 +6,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SplashScreenWidget extends StatefulWidget {
-  const SplashScreenWidget({Key key}) : super(key: key);
+  const SplashScreenWidget({Key? key}) : super(key: key);
 
   @override
   _SplashScreenWidgetState createState() => _SplashScreenWidgetState();

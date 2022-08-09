@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ForgetPasswordPageWidget extends StatefulWidget {
-  const ForgetPasswordPageWidget({Key key}) : super(key: key);
+  const ForgetPasswordPageWidget({Key? key}) : super(key: key);
 
   @override
   _ForgetPasswordPageWidgetState createState() =>

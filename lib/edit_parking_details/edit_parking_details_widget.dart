@@ -16,7 +16,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 class EditParkingDetailsWidget extends StatefulWidget {
   const EditParkingDetailsWidget({
-    Key key,
+    Key? key,
     this.img,
     this.price,
     this.floor,
@@ -25,12 +25,12 @@ class EditParkingDetailsWidget extends StatefulWidget {
     this.uploadParking,
   }) : super(key: key);
 
-  final String img;
-  final double price;
-  final int floor;
-  final String vehicleType;
-  final String direction;
-  final DocumentReference uploadParking;
+  final String? img;
+  final double? price;
+  final int? floor;
+  final String? vehicleType;
+  final String? direction;
+  final DocumentReference? uploadParking;
 
   @override
   _EditParkingDetailsWidgetState createState() =>
@@ -39,10 +39,10 @@ class EditParkingDetailsWidget extends StatefulWidget {
 
 class _EditParkingDetailsWidgetState extends State<EditParkingDetailsWidget> {
   String uploadedFileUrl = '';
-  TextEditingController pricePerDayCtrlController;
-  TextEditingController foolrCountCtrlController;
-  String vehicleTypeDropValue;
-  String directionDropValue;
+  TextEditingController? pricePerDayCtrlController;
+  TextEditingController? foolrCountCtrlController;
+  String? vehicleTypeDropValue;
+  String? directionDropValue;
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -130,12 +130,12 @@ class _EditParkingDetailsWidgetState extends State<EditParkingDetailsWidget> {
                                               await uploadData(
                                                   m.storagePath, m.bytes))))
                                       .where((u) => u != null)
+                                      .map((u) => u!)
                                       .toList();
                                   ScaffoldMessenger.of(context)
                                       .hideCurrentSnackBar();
-                                  if (downloadUrls != null &&
-                                      downloadUrls.length ==
-                                          selectedMedia.length) {
+                                  if (downloadUrls.length ==
+                                      selectedMedia.length) {
                                     setState(() =>
                                         uploadedFileUrl = downloadUrls.first);
                                     showUploadMessage(
@@ -218,7 +218,7 @@ class _EditParkingDetailsWidgetState extends State<EditParkingDetailsWidget> {
                                       EdgeInsetsDirectional.fromSTEB(
                                           10, 10, 10, 10),
                                   suffixIcon:
-                                      pricePerDayCtrlController.text.isNotEmpty
+                                      pricePerDayCtrlController!.text.isNotEmpty
                                           ? InkWell(
                                               onTap: () => setState(
                                                 () => pricePerDayCtrlController
@@ -275,7 +275,7 @@ class _EditParkingDetailsWidgetState extends State<EditParkingDetailsWidget> {
                                       EdgeInsetsDirectional.fromSTEB(
                                           10, 10, 10, 10),
                                   suffixIcon:
-                                      foolrCountCtrlController.text.isNotEmpty
+                                      foolrCountCtrlController!.text.isNotEmpty
                                           ? InkWell(
                                               onTap: () => setState(
                                                 () => foolrCountCtrlController
@@ -349,7 +349,7 @@ class _EditParkingDetailsWidgetState extends State<EditParkingDetailsWidget> {
                               child: FFButtonWidget(
                                 onPressed: () async {
                                   if (formKey.currentState == null ||
-                                      !formKey.currentState.validate()) {
+                                      !formKey.currentState!.validate()) {
                                     return;
                                   }
 
@@ -361,12 +361,12 @@ class _EditParkingDetailsWidgetState extends State<EditParkingDetailsWidget> {
                                     parkingImg: functions.currentImg(
                                         widget.img, uploadedFileUrl),
                                     price: double.parse(
-                                        pricePerDayCtrlController.text),
+                                        pricePerDayCtrlController!.text),
                                     locationDirection: directionDropValue,
-                                    floor: foolrCountCtrlController.text,
+                                    floor: foolrCountCtrlController!.text,
                                     vehicleType: vehicleTypeDropValue,
                                   );
-                                  await widget.uploadParking
+                                  await widget.uploadParking!
                                       .update(uploadParkingUpdateData);
                                   Navigator.pop(context);
                                 },
