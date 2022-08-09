@@ -1,0 +1,32 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "UploadParking",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "vehicle_type",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "regby_email_id",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "UploadParking",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "regby_email_id",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "regtime",
+          "order": "DESCENDING"
+        }
+      ]
+    }
+  ]
+}
