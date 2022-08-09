@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "2287695643",
+    "project_id": "appartment-parking-rental-app",
+    "storage_bucket": "appartment-parking-rental-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:2287695643:android:2e2f7ed29e040db5af85be",
+        "android_client_info": {
+          "package_name": "com.mycompany.appartmentparkingrentalapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "2287695643-pq9rauvna68isso5hcemad1o0knglk3n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWIGLe84iKnqdWwjptyQpHdDzPu1MenWY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "2287695643-pq9rauvna68isso5hcemad1o0knglk3n.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "2287695643-7et77q8hhe49opppouc56oarqah0dsk6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mycompany.appartmentparkingrentalapp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
