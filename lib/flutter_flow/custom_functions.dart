@@ -87,12 +87,31 @@ bool hasImgFile(String? imgPath) {
   return imgPath != null && imgPath != "";
 }
 
-bool isMatchDates(
-  DateTime? fromdate,
-  DateTime? todate,
-  List<DocumentReference>? collection,
+bool isFormDateMatch(
+  DateTime? fromDate,
+  List<ConfirmBookingRecord>? collection,
 ) {
   // Add your function code here!
 
-  return false;
+  List search = collection!
+      .where((element) =>
+          DateFormat('dd-MM-yyyy').format(element.fromdate!) ==
+          DateFormat('dd-MM-yyyy').format(fromDate!))
+      .toList();
+
+  if (search.length > 0) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+String paymentNotificationToOwner(
+  double? totalamt,
+  String? username,
+  int? dayscount,
+  String? ownername,
+) {
+  // Add your function code here!
+  return "Hello $ownername !\n\n ₹ $totalamt Payment Received from $username Confirmed Booking for $dayscount days.";
 }

@@ -21,6 +21,12 @@ abstract class NotificationsRecord
 
   String? get regemailid;
 
+  bool? get isUserShown;
+
+  String? get targetEmailid;
+
+  double? get totalAmt;
+
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
   DocumentReference get reference => ffRef!;
@@ -29,7 +35,10 @@ abstract class NotificationsRecord
     ..uid = ''
     ..msg = ''
     ..notificationtype = ''
-    ..regemailid = '';
+    ..regemailid = ''
+    ..isUserShown = false
+    ..targetEmailid = ''
+    ..totalAmt = 0.0;
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('notifications');
@@ -59,6 +68,9 @@ Map<String, dynamic> createNotificationsRecordData({
   String? msg,
   String? notificationtype,
   String? regemailid,
+  bool? isUserShown,
+  String? targetEmailid,
+  double? totalAmt,
 }) {
   final firestoreData = serializers.toFirestore(
     NotificationsRecord.serializer,
@@ -68,7 +80,10 @@ Map<String, dynamic> createNotificationsRecordData({
         ..regtime = regtime
         ..msg = msg
         ..notificationtype = notificationtype
-        ..regemailid = regemailid,
+        ..regemailid = regemailid
+        ..isUserShown = isUserShown
+        ..targetEmailid = targetEmailid
+        ..totalAmt = totalAmt,
     ),
   );
 

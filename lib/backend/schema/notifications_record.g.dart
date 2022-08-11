@@ -60,6 +60,27 @@ class _$NotificationsRecordSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
+    value = object.isUserShown;
+    if (value != null) {
+      result
+        ..add('isUserShown')
+        ..add(
+            serializers.serialize(value, specifiedType: const FullType(bool)));
+    }
+    value = object.targetEmailid;
+    if (value != null) {
+      result
+        ..add('targetEmailid')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.totalAmt;
+    if (value != null) {
+      result
+        ..add('totalAmt')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(double)));
+    }
     value = object.ffRef;
     if (value != null) {
       result
@@ -103,6 +124,18 @@ class _$NotificationsRecordSerializer
           result.regemailid = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
+        case 'isUserShown':
+          result.isUserShown = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool?;
+          break;
+        case 'targetEmailid':
+          result.targetEmailid = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
+        case 'totalAmt':
+          result.totalAmt = serializers.deserialize(value,
+              specifiedType: const FullType(double)) as double?;
+          break;
         case 'Document__Reference__Field':
           result.ffRef = serializers.deserialize(value,
               specifiedType: const FullType(DocumentReference, const [
@@ -128,6 +161,12 @@ class _$NotificationsRecord extends NotificationsRecord {
   @override
   final String? regemailid;
   @override
+  final bool? isUserShown;
+  @override
+  final String? targetEmailid;
+  @override
+  final double? totalAmt;
+  @override
   final DocumentReference<Object?>? ffRef;
 
   factory _$NotificationsRecord(
@@ -140,6 +179,9 @@ class _$NotificationsRecord extends NotificationsRecord {
       this.msg,
       this.notificationtype,
       this.regemailid,
+      this.isUserShown,
+      this.targetEmailid,
+      this.totalAmt,
       this.ffRef})
       : super._();
 
@@ -161,6 +203,9 @@ class _$NotificationsRecord extends NotificationsRecord {
         msg == other.msg &&
         notificationtype == other.notificationtype &&
         regemailid == other.regemailid &&
+        isUserShown == other.isUserShown &&
+        targetEmailid == other.targetEmailid &&
+        totalAmt == other.totalAmt &&
         ffRef == other.ffRef;
   }
 
@@ -168,9 +213,17 @@ class _$NotificationsRecord extends NotificationsRecord {
   int get hashCode {
     return $jf($jc(
         $jc(
-            $jc($jc($jc($jc(0, uid.hashCode), regtime.hashCode), msg.hashCode),
-                notificationtype.hashCode),
-            regemailid.hashCode),
+            $jc(
+                $jc(
+                    $jc(
+                        $jc(
+                            $jc($jc($jc(0, uid.hashCode), regtime.hashCode),
+                                msg.hashCode),
+                            notificationtype.hashCode),
+                        regemailid.hashCode),
+                    isUserShown.hashCode),
+                targetEmailid.hashCode),
+            totalAmt.hashCode),
         ffRef.hashCode));
   }
 
@@ -182,6 +235,9 @@ class _$NotificationsRecord extends NotificationsRecord {
           ..add('msg', msg)
           ..add('notificationtype', notificationtype)
           ..add('regemailid', regemailid)
+          ..add('isUserShown', isUserShown)
+          ..add('targetEmailid', targetEmailid)
+          ..add('totalAmt', totalAmt)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -212,6 +268,19 @@ class NotificationsRecordBuilder
   String? get regemailid => _$this._regemailid;
   set regemailid(String? regemailid) => _$this._regemailid = regemailid;
 
+  bool? _isUserShown;
+  bool? get isUserShown => _$this._isUserShown;
+  set isUserShown(bool? isUserShown) => _$this._isUserShown = isUserShown;
+
+  String? _targetEmailid;
+  String? get targetEmailid => _$this._targetEmailid;
+  set targetEmailid(String? targetEmailid) =>
+      _$this._targetEmailid = targetEmailid;
+
+  double? _totalAmt;
+  double? get totalAmt => _$this._totalAmt;
+  set totalAmt(double? totalAmt) => _$this._totalAmt = totalAmt;
+
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
   set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
@@ -228,6 +297,9 @@ class NotificationsRecordBuilder
       _msg = $v.msg;
       _notificationtype = $v.notificationtype;
       _regemailid = $v.regemailid;
+      _isUserShown = $v.isUserShown;
+      _targetEmailid = $v.targetEmailid;
+      _totalAmt = $v.totalAmt;
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -256,6 +328,9 @@ class NotificationsRecordBuilder
             msg: msg,
             notificationtype: notificationtype,
             regemailid: regemailid,
+            isUserShown: isUserShown,
+            targetEmailid: targetEmailid,
+            totalAmt: totalAmt,
             ffRef: ffRef);
     replace(_$result);
     return _$result;

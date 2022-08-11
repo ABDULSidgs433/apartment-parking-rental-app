@@ -6,6 +6,7 @@ import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../notification_page/notification_page_widget.dart';
 import '../parking_details/parking_details_widget.dart';
 import '../profile_page/profile_page_widget.dart';
 import '../sell_parking_area/sell_parking_area_widget.dart';
@@ -102,6 +103,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                         ),
                                         child: Image.network(
                                           currentUserPhoto,
+                                          fit: BoxFit.contain,
                                         ),
                                       ),
                                     ),
@@ -507,40 +509,101 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                       ],
                                     ),
                                   ),
-                                  Badge(
-                                    badgeContent: Text(
-                                      '0',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyText1
-                                          .override(
-                                            fontFamily: 'Poppins',
-                                            color: Colors.white,
+                                  StreamBuilder<List<NotificationsRecord>>(
+                                    stream: queryNotificationsRecord(
+                                      queryBuilder: (notificationsRecord) =>
+                                          notificationsRecord
+                                              .where('isUserShown',
+                                                  isEqualTo: false)
+                                              .where('targetEmailid',
+                                                  isEqualTo: currentUserEmail),
+                                    ),
+                                    builder: (context, snapshot) {
+                                      // Customize what your widget looks like when it's loading.
+                                      if (!snapshot.hasData) {
+                                        return Center(
+                                          child: SizedBox(
+                                            width: 50,
+                                            height: 50,
+                                            child: CircularProgressIndicator(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryColor,
+                                            ),
                                           ),
-                                    ),
-                                    showBadge: true,
-                                    shape: BadgeShape.circle,
-                                    badgeColor: Color(0xFFC4A041),
-                                    elevation: 4,
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        8, 8, 8, 8),
-                                    position: BadgePosition.topEnd(),
-                                    animationType: BadgeAnimationType.scale,
-                                    toAnimate: true,
-                                    child: FlutterFlowIconButton(
-                                      borderColor: Colors.transparent,
-                                      borderRadius: 30,
-                                      borderWidth: 1,
-                                      buttonSize: 60,
-                                      icon: Icon(
-                                        Icons.notifications_active,
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryText,
-                                        size: 30,
-                                      ),
-                                      onPressed: () {
-                                        print('IconButton pressed ...');
-                                      },
-                                    ),
+                                        );
+                                      }
+                                      List<NotificationsRecord>
+                                          badgeNotificationsRecordList =
+                                          snapshot.data!;
+                                      return InkWell(
+                                        onTap: () async {
+                                          await Navigator.push(
+                                            context,
+                                            PageTransition(
+                                              type: PageTransitionType
+                                                  .rightToLeft,
+                                              duration:
+                                                  Duration(milliseconds: 600),
+                                              reverseDuration:
+                                                  Duration(milliseconds: 600),
+                                              child: NotificationPageWidget(),
+                                            ),
+                                          );
+                                        },
+                                        child: Badge(
+                                          badgeContent: Text(
+                                            badgeNotificationsRecordList.length
+                                                .toString(),
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText1
+                                                .override(
+                                                  fontFamily: 'Poppins',
+                                                  color: Colors.white,
+                                                ),
+                                          ),
+                                          showBadge: true,
+                                          shape: BadgeShape.circle,
+                                          badgeColor: Color(0xFFC4A041),
+                                          elevation: 4,
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  8, 8, 8, 8),
+                                          position: BadgePosition.topEnd(),
+                                          animationType:
+                                              BadgeAnimationType.scale,
+                                          toAnimate: true,
+                                          child: FlutterFlowIconButton(
+                                            borderColor: Colors.transparent,
+                                            borderRadius: 30,
+                                            borderWidth: 1,
+                                            buttonSize: 60,
+                                            icon: Icon(
+                                              Icons.notifications_active,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryText,
+                                              size: 30,
+                                            ),
+                                            onPressed: () async {
+                                              await Navigator.push(
+                                                context,
+                                                PageTransition(
+                                                  type: PageTransitionType
+                                                      .rightToLeft,
+                                                  duration: Duration(
+                                                      milliseconds: 600),
+                                                  reverseDuration: Duration(
+                                                      milliseconds: 600),
+                                                  child:
+                                                      NotificationPageWidget(),
+                                                ),
+                                              );
+                                            },
+                                          ),
+                                        ),
+                                      );
+                                    },
                                   ),
                                   Column(
                                     mainAxisSize: MainAxisSize.max,

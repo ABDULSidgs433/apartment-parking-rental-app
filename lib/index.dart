@@ -19,3 +19,7 @@ export 'success_payment_page/success_payment_page_widget.dart'
     show SuccessPaymentPageWidget;
 export 'booking_list/booking_list_widget.dart' show BookingListWidget;
 export 'profile_page/profile_page_widget.dart' show ProfilePageWidget;
+export 'notification_page/notification_page_widget.dart'
+    show NotificationPageWidget;
+export 'notification_details/notification_details_widget.dart'
+    show NotificationDetailsWidget;
